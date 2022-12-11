@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main{
+  background: #0B2434;
+  width: 360px;
+  height: 379px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container{
+  background: #fff;
+  width: 320px;
+  height: 320px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+     
+}
+.dies-container{
+
+  display: grid;
+  grid-template-columns: repeat(5, 35px);
+  grid-template-rows: repeat(2, 35px);
+  grid-gap: 1rem;
+  justify-content: center;
+  align-content: center;
+}
+.paragraph{
+  font-size: 12px;
+  text-align: center;
+  }
+
+.die{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  box-shadow: 3px 5px 10px rgba(0,  0, 0, 0.3);
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.freeze{
+  background: #59E391;
+}
+
+.roll-btn{
+  width: 92px;
+  height: 35px;
+  background: #5035FF;
+  border: none;
+  border-radius: 5px; 
+  color: #fff;
+  cursor: pointer;
+}
+.roll-btn:active{
+outline: none;
+border: none;
+}
+.roll-btn{
+  width: 92px;
+  height: 35px;
+  background: #5035FF;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
