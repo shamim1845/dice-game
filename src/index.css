@@ -32,6 +32,14 @@ main{
   gap: 1rem;
      
 }
+
+.game-info{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  width: 100%;
+
+}
 .dies-container{
 
   display: grid;
