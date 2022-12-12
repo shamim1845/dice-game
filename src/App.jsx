@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Die from "./components/Die";
 import { nanoid } from "nanoid";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
+import useKey from "../hooks/useKey";
+
+
 
 const App = () => {
   const [allDies, setAllDies] = React.useState(allNewDice());
@@ -15,7 +18,12 @@ const App = () => {
 
   const { width, height } = useWindowSize();
 
-  React.useEffect(() => {
+  useKey("KeyR", (event) => {
+       rollDice();
+  });
+
+
+  useEffect(() => {
     if (startTimer) {
       let myIntervalId = setInterval(() => {
         setTime((prev) => prev + 1);
@@ -28,8 +36,8 @@ const App = () => {
     return () => clearInterval(timerId);
   }, [startTimer]);
 
-  React.useEffect(() => {
-    let firstDies = allDies[0].value;
+  useEffect(() => {
+     let firstDies = allDies[0].value;
 
     const allHeld = allDies.every((dies) => dies.isHeld === true);
     const allvalue = allDies.every((dies) => dies.value === firstDies);
@@ -44,8 +52,8 @@ const App = () => {
     }
   }, [allDies]);
 
-  React.useEffect(() => {
-    setHighestScore(() => localStorage.getItem("Tenzies_score") || 0);
+  useEffect(() => {
+       setHighestScore(() => localStorage.getItem("Tenzies_score") || 0);
   }, [tenzies]);
 
   // generateNewDies
@@ -76,9 +84,9 @@ const App = () => {
   }
 
   // rollDice
-  function rollDice() {
-    setAllDies((oldDies) => {
-      return allDies.map((dies) => {
+  function rollDice(e) {
+      setAllDies((oldDies) => {
+      return oldDies.map((dies) => {
         return dies.isHeld === false ? generateNewDies() : dies;
       });
     });
@@ -145,6 +153,12 @@ const App = () => {
         >
           {time === 0 ? "Start game" : tenzies ? "New Game" : "Roll"}
         </button>
+
+        {tenzies && (
+          <audio   autoPlay>
+            <source src="https://dm0qx8t0i9gc9.cloudfront.net/previews/audio/BsTwCwBHBjzwub4i4/audioblocks-happy-happy-award-achievement_HZfXAP7tPU_NWM.mp3"/>
+          </audio>
+        )}
       </div>
     </main>
   );
