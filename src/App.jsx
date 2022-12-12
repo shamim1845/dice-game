@@ -15,21 +15,18 @@ const App = () => {
 
   const { width, height } = useWindowSize();
 
-
   React.useEffect(() => {
-    if(startTimer) {
-    let  myIntervalId = setInterval(() => {
-      setTime(prev => prev+1)
-    }, 1000);
-    setTimerId(myIntervalId);
+    if (startTimer) {
+      let myIntervalId = setInterval(() => {
+        setTime((prev) => prev + 1);
+      }, 1000);
+      setTimerId(myIntervalId);
     } else {
-clearInterval(timerId)
+      clearInterval(timerId);
     }
 
-    return() => clearInterval(timerId);
-
-  }, [startTimer])
-
+    return () => clearInterval(timerId);
+  }, [startTimer]);
 
   React.useEffect(() => {
     let firstDies = allDies[0].value;
@@ -41,7 +38,7 @@ clearInterval(timerId)
       if (highestScore === 0 || highestScore > totalRoll) {
         localStorage.setItem("Tenzies_score", time);
       }
-      setStartTimer(false)
+      setStartTimer(false);
     } else {
       setTenzies(false);
     }
@@ -49,7 +46,6 @@ clearInterval(timerId)
 
   React.useEffect(() => {
     setHighestScore(() => localStorage.getItem("Tenzies_score") || 0);
- 
   }, [tenzies]);
 
   // generateNewDies
@@ -90,24 +86,29 @@ clearInterval(timerId)
   }
   // New game
   function newGame() {
- 
     setTotalRoll(0);
-    setTime(0)
+    setTime(0);
     setAllDies(allNewDice());
-   
   }
 
-
-
-console.log("time :", time);
   return (
     <main>
       {tenzies && <Confetti width={width} height={height} />}
 
       <div className="container">
         <div className="game-info">
-         <span style={{visibility: `${highestScore<=0 ? "hidden" : "visible"}`}}>Highest Score: {highestScore}(sec)</span>
-         <span style={{visibility: `${totalRoll<=0 ? "hidden" : "visible"}`}}>Total Roll: {totalRoll}</span>
+          <span
+            style={{
+              visibility: `${highestScore <= 0 ? "hidden" : "visible"}`,
+            }}
+          >
+            Highest Score: {highestScore}(sec)
+          </span>
+          <span
+            style={{ visibility: `${totalRoll <= 0 ? "hidden" : "visible"}` }}
+          >
+            Total Roll: {totalRoll}
+          </span>
         </div>
 
         <h2 className="title">Tenzies 2.0</h2>
@@ -130,24 +131,23 @@ console.log("time :", time);
               );
             })}
         </div>
-        {
-          time>0 && <div>Time: {time}</div>
-        }
+        {time > 0 && <div>Time: {time}</div>}
 
-        <button className="roll-btn" onClick={time===0 ? () =>setStartTimer(true) : tenzies ? newGame : rollDice}>
-          {time===0 ?"Start game" : tenzies ? "New Game" : "Roll"}
+        <button
+          className="roll-btn"
+          onClick={
+            time === 0
+              ? () => setStartTimer(true)
+              : tenzies
+              ? newGame
+              : rollDice
+          }
+        >
+          {time === 0 ? "Start game" : tenzies ? "New Game" : "Roll"}
         </button>
-
-
-
       </div>
     </main>
   );
 };
 
 export default App;
-
-
-
-
-
